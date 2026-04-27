@@ -3,32 +3,22 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "SaaS Landing Page",
-    description: "A beautiful landing page app using React and Tailwind.",
-    image: "/projects/project1.png",
-    tags: ["React", "TailwindCSS", "Supabase"],
-    demoUrl: "#",
-    githubUrl: "#",
+    title: "Stream Together",
+    description: "Want to watch YT videos with you Friends or Partner? Well here's your StreamTogether",
+    image: "/projects/image.png",
+    tags: ["React", "TailwindCSS", "Socket.io"],
+    demoUrl: "https://streamtogether.onrender.com/",
+    githubUrl: "https://github.com/Maaaccc05/StreamTogether",
   },
   {
     id: 2,
-    title: "Orbit Analytics Dashboard",
+    title: "Cafe Finder",
     description:
-      "Interactive analytics dashboard with data visualization and filtering capabilities.",
-    image: "/projects/project2.png",
-    tags: ["TypeScript", "D3.js", "Next.js"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 3,
-    title: "E-commerce Platform",
-    description:
-      "Full-featured e-commerce platform with user authentication and payment processing.",
-    image: "/projects/project3.png",
-    tags: ["React", "Node.js", "Stripe"],
-    demoUrl: "#",
-    githubUrl: "#",
+      "Just simple Cafe finder Which finds Cafe near you using Google Maps",
+    image: "/projects/image2.png",
+    tags: ["React", "Tailwind", "Google Maps API"],
+    demoUrl: "https://cafe-finder-nu.vercel.app/",
+    githubUrl: "https://github.com/Maaaccc05/Cafe-Finder",
   },
 ];
 
@@ -38,13 +28,9 @@ export const ProjectsSection = () => {
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
           {" "}
-          Featured <span className="text-primary"> Projects </span>
+           <span className="text-primary"> Projects </span>
         </h2>
-
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Here are some of my recent projects. Each project was carefully
-          crafted with attention to detail, performance, and user experience.
-        </p>
+        <br/>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, key) => (
@@ -100,7 +86,7 @@ export const ProjectsSection = () => {
           <a
             className="cosmic-button w-fit flex items-center mx-auto gap-2"
             target="_blank"
-            href="https://github.com/machadop1407"
+            href="https://github.com/Maaaccc05"
           >
             Check My Github <ArrowRight size={16} />
           </a>
