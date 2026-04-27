@@ -1,45 +1,59 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 
 export const ThemeToggle = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      localStorage.setItem("theme", "light");
-      setIsDarkMode(false);
-    }
+    // Always start dark for our new design
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
   }, []);
 
-  const toggleTheme = () => {
-    if (isDarkMode) {
+  const toggle = () => {
+    if (isDark) {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
-      setIsDarkMode(false);
+      setIsDark(false);
     } else {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
-      setIsDarkMode(true);
+      setIsDark(true);
     }
   };
 
   return (
     <button
-      onClick={toggleTheme}
-      className={cn(
-        "fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300",
-        "focus:outlin-hidden"
-      )}
+      onClick={toggle}
+      aria-label="Toggle theme"
+      style={{
+        position: "fixed",
+        top: "1.1rem",
+        right: "5rem",
+        zIndex: 50,
+        width: 34,
+        height: 34,
+        borderRadius: 8,
+        border: "1px solid rgba(255,255,255,0.08)",
+        background: "rgba(17,17,17,0.8)",
+        backdropFilter: "blur(12px)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        transition: "border-color 0.2s",
+      }}
+      onMouseEnter={(e) =>
+        (e.currentTarget.style.borderColor = "rgba(163,230,53,0.3)")
+      }
+      onMouseLeave={(e) =>
+        (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")
+      }
     >
-      {isDarkMode ? (
-        <Sun className="h-6 w-6 text-yellow-300" />
+      {isDark ? (
+        <Sun size={15} color="#a3e635" />
       ) : (
-        <Moon className="h-6 w-6 text-blue-900" />
+        <Moon size={15} color="#888" />
       )}
     </button>
   );

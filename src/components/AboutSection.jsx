@@ -1,74 +1,195 @@
-// import { Briefcase, Code, User } from "lucide-react";
 import { Briefcase, Code, Brain } from "lucide-react";
+
+const cards = [
+  {
+    icon: Code,
+    title: "Web Development",
+    body: "Building responsive and scalable web applications",
+  },
+  {
+    icon: Brain,
+    title: "Machine Learning",
+    body: "Currently learning machine learning and exploring how to integrate intelligent features into web applications.",
+  },
+  {
+    icon: Briefcase,
+    title: "Full Stack",
+    body: "Comfortable across the entire MERN stack — from database design to polished UIs.",
+  },
+];
 
 export const AboutSection = () => {
   return (
     <section id="about" className="py-24 px-4 relative">
-      {" "}
+      {/* Subtle divider glow */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "80%",
+          maxWidth: 700,
+          height: 1,
+          background:
+            "linear-gradient(90deg,transparent,rgba(163,230,53,0.25),transparent)",
+        }}
+      />
+
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          About <span className="text-primary"> Me</span>
-        </h2>
+        {/* Header */}
+        <div style={{ marginBottom: "4rem" }}>
+          <span className="section-label">
+            <span
+              style={{
+                width: 16,
+                height: 1,
+                background: "#a3e635",
+                display: "inline-block",
+              }}
+            />
+            About me
+          </span>
+          <h2
+            style={{
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+              color: "#f0f0f0",
+            }}
+          >
+            Full Stack Developer<br />
+            <span
+              style={{
+                background: "linear-gradient(135deg,#a3e635,#65a30d)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              &amp; Teaching Machines to Learn
+            </span>
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h3 className="text-2xl font-semibold">
-              Full Stack Developer & and Teaching Machines to Learn
-            </h3>
-
-            <p className="text-muted-foreground">
-              <p className="text-muted-foreground">
-                <p className="text-muted-foreground">
-                  I'm a full stack developer(MERN). I focus on building clean
-                  and functional web applications. Recently, I've started
-                  exploring machine learning and I'm learning how to bring those
-                  ideas into my projects.
-                </p>
-              </p>
+        {/* Two-column layout */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "4rem",
+            alignItems: "start",
+          }}
+          className="max-md:!grid-cols-1 max-md:!gap-10"
+        >
+          {/* Left: bio */}
+          <div>
+            <p
+              style={{
+                fontSize: "1rem",
+                color: "#888",
+                lineHeight: 1.8,
+                marginBottom: "2rem",
+              }}
+            >
+              I'm a full stack developer (MERN). I focus on building clean and
+              functional web applications. Recently, I've started exploring
+              machine learning and I'm learning how to bring those ideas into my
+              projects.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a href="#contact" className="cosmic-button">
-                {" "}
-                Get In Touch
-              </a>
 
+            <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+              <a href="#contact" className="btn-accent">
+                Get in touch
+              </a>
               <a
                 href="/resume.pdf"
-                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
+                className="btn-ghost"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Download CV
               </a>
             </div>
+
+            {/* Thin separator */}
+            <div
+              style={{
+                marginTop: "2.5rem",
+                paddingTop: "2rem",
+                borderTop: "1px solid rgba(255,255,255,0.05)",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "0.72rem",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  color: "#444",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  marginBottom: "0.75rem",
+                }}
+              >
+                Currently based in India
+              </p>
+              <p
+                style={{
+                  fontSize: "0.72rem",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  color: "#444",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Open to remote &amp; on-site roles
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-6">
-            <div className="gradient-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Code className="h-6 w-6 text-primary" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">Web Development</h4>
-                  <p className="text-muted-foreground">
-                    Building responsive and scalable web applications
-                  </p>
+          {/* Right: cards */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            {cards.map(({ icon: Icon, title, body }) => (
+              <div
+                key={title}
+                className="gradient-border card-hover"
+                style={{ padding: "1.25rem 1.5rem" }}
+              >
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <div
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 8,
+                      background: "rgba(163,230,53,0.08)",
+                      border: "1px solid rgba(163,230,53,0.15)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Icon size={16} color="#a3e635" />
+                  </div>
+                  <div>
+                    <h4
+                      style={{
+                        fontWeight: 600,
+                        fontSize: "0.9rem",
+                        color: "#f0f0f0",
+                        marginBottom: "0.3rem",
+                      }}
+                    >
+                      {title}
+                    </h4>
+                    <p style={{ fontSize: "0.8rem", color: "#666", lineHeight: 1.6 }}>
+                      {body}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="gradient-border p-6 card-hover">
-  <div className="flex items-start gap-4">
-    <div className="p-3 rounded-full bg-primary/10">
-      <Brain className="h-6 w-6 text-primary" />
-    </div>
-    <div className="text-left">
-      <h4 className="font-semibold text-lg">Machine Learning</h4>
-      <p className="text-muted-foreground">
-        Currently learning machine learning and exploring how to integrate intelligent features into web applications.
-      </p>
-    </div>
-  </div>
-</div>
-            
+            ))}
           </div>
         </div>
       </div>

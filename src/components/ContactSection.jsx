@@ -1,16 +1,25 @@
-import {
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  Twitch,
-  Twitter,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Instagram, Linkedin, Mail, Send, Twitter } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+
+const socials = [
+  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mayuresh-kamble-79ba97306/" },
+  { icon: Twitter, label: "X", href: "https://x.com/macck69" },
+  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/maaacccc2?igsh=cXE0MTB0M2I5cDNy" },
+];
+
+const inputStyle = {
+  width: "100%",
+  padding: "0.75rem 1rem",
+  borderRadius: 8,
+  border: "1px solid rgba(255,255,255,0.08)",
+  background: "#111",
+  color: "#f0f0f0",
+  fontSize: "0.88rem",
+  fontFamily: "Inter, sans-serif",
+  outline: "none",
+  transition: "border-color 0.2s",
+};
 
 export const ContactSection = () => {
   const { toast } = useToast();
@@ -18,144 +27,304 @@ export const ContactSection = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setIsSubmitting(true);
-
     setTimeout(() => {
       toast({
         title: "Message sent!",
         description: "Thank you for your message. I'll get back to you soon.",
       });
       setIsSubmitting(false);
+      e.target.reset();
     }, 1500);
   };
+
   return (
-    <section id="contact" className="py-24 px-4 relative bg-secondary/30">
+    <section
+      id="contact"
+      className="py-24 px-4 relative"
+      style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}
+    >
+      {/* Top glow accent */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "60%",
+          maxWidth: 600,
+          height: 1,
+          background:
+            "linear-gradient(90deg,transparent,rgba(163,230,53,0.3),transparent)",
+        }}
+      />
+
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Get In <span className="text-primary"> Touch</span>
-        </h2>
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+          <span className="section-label" style={{ justifyContent: "center" }}>
+            <span
+              style={{
+                width: 16,
+                height: 1,
+                background: "#a3e635",
+                display: "inline-block",
+              }}
+            />
+            Contact
+          </span>
+          <h2
+            style={{
+              fontSize: "clamp(1.8rem,3.5vw,2.6rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.03em",
+              color: "#f0f0f0",
+              lineHeight: 1.1,
+              marginBottom: "1rem",
+            }}
+          >
+            Get In{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg,#a3e635,#65a30d)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Touch
+            </span>
+          </h2>
+          <p
+            style={{
+              fontSize: "0.95rem",
+              color: "#666",
+              maxWidth: 480,
+              margin: "0 auto",
+              lineHeight: 1.7,
+            }}
+          >
+            Have a project in mind or want to collaborate? Feel free to reach
+            out. I'm always open to discussing new opportunities.
+          </p>
+        </div>
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Have a project in mind or want to collaborate? Feel free to reach out.
-          I'm always open to discussing new opportunities.
-        </p>
+        {/* Two columns */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.4fr",
+            gap: "3rem",
+            alignItems: "start",
+          }}
+          className="max-md:!grid-cols-1"
+        >
+          {/* Left: info */}
+          <div>
+            {/* Email card */}
+            <div
+              style={{
+                background: "#111",
+                border: "1px solid rgba(255,255,255,0.06)",
+                borderRadius: 12,
+                padding: "1.5rem",
+                marginBottom: "1.5rem",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "0.65rem",
+                  color: "#555",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                Email
+              </p>
+              <a
+                href="mailto:mackam30@gmail.com"
+                style={{
+                  fontSize: "0.9rem",
+                  fontWeight: 500,
+                  color: "#a3e635",
+                  textDecoration: "none",
+                  transition: "opacity 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.75")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              >
+                mackam30@gmail.com
+              </a>
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-8">
-            <h3 className="text-2xl font-semibold mb-6">
-              {" "}
-              Contact Information
+            {/* Social links */}
+            <div
+              style={{
+                background: "#111",
+                border: "1px solid rgba(255,255,255,0.06)",
+                borderRadius: 12,
+                padding: "1.5rem",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "0.65rem",
+                  color: "#555",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  marginBottom: "1rem",
+                }}
+              >
+                Social
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                {socials.map(({ icon: Icon, label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      fontSize: "0.85rem",
+                      color: "#666",
+                      textDecoration: "none",
+                      transition: "color 0.2s",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#f0f0f0")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#666")}
+                  >
+                    <Icon size={15} />
+                    {label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right: form */}
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              background: "#111",
+              border: "1px solid rgba(255,255,255,0.06)",
+              borderRadius: 12,
+              padding: "2rem",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1.25rem",
+            }}
+          >
+            <h3
+              style={{
+                fontSize: "1rem",
+                fontWeight: 700,
+                color: "#f0f0f0",
+                marginBottom: "0.25rem",
+              }}
+            >
+              Send a Message
             </h3>
 
-            <div className="space-y-6 justify-center">
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Mail className="h-6 w-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium"> Email</h4>
-                  <a
-                    href="mailto:mackam30@gmail.com"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    mackam30@gmail.com
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-8">
-              <h4 className="font-medium mb-4"> Connect With Me</h4>
-              <div className="flex space-x-4 justify-center">
-                <a href="#" target="_blank">
-                  <Linkedin />
-                </a>
-                <a href="#" target="_blank">
-                  <Twitter />
-                </a>
-                <a href="#" target="_blank">
-                  <Instagram />
-                </a>
-                <a href="#" target="_blank">
-                  <Twitch />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="bg-card p-8 rounded-lg shadow-xs"
-            onSubmit={handleSubmit}
-          >
-            <h3 className="text-2xl font-semibold mb-6"> Send a Message</h3>
-
-            <form className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium mb-2"
-                >
-                  {" "}
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="name"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium mb-2"
-                >
-                  {" "}
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="email"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-2"
-                >
-                  {" "}
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary resize-none"
-                  placeholder="Hello, I'd like to talk about..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={cn(
-                  "cosmic-button w-full flex items-center justify-center gap-2"
-                )}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+              <label
+                htmlFor="name"
+                style={{
+                  fontSize: "0.72rem",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  color: "#555",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
-                <Send size={16} />
-              </button>
-            </form>
-          </div>
+                Your Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                placeholder="name"
+                style={inputStyle}
+                onFocus={(e) => (e.target.style.borderColor = "rgba(163,230,53,0.4)")}
+                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
+              />
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+              <label
+                htmlFor="email"
+                style={{
+                  fontSize: "0.72rem",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  color: "#555",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Your Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="email"
+                style={inputStyle}
+                onFocus={(e) => (e.target.style.borderColor = "rgba(163,230,53,0.4)")}
+                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
+              />
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+              <label
+                htmlFor="message"
+                style={{
+                  fontSize: "0.72rem",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  color: "#555",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                placeholder="Hello, I'd like to talk about..."
+                style={{
+                  ...inputStyle,
+                  resize: "vertical",
+                  minHeight: 120,
+                }}
+                onFocus={(e) => (e.target.style.borderColor = "rgba(163,230,53,0.4)")}
+                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn-accent"
+              style={{
+                justifyContent: "center",
+                opacity: isSubmitting ? 0.6 : 1,
+                cursor: isSubmitting ? "not-allowed" : "pointer",
+              }}
+            >
+              {isSubmitting ? "Sending…" : "Send Message"}
+              <Send size={14} />
+            </button>
+          </form>
         </div>
       </div>
     </section>
