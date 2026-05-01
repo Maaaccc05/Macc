@@ -85,8 +85,8 @@ export const Navbar = () => {
               }}
               onMouseEnter={(e) => (e.target.style.color = "#f0f0f0")}
               onMouseLeave={(e) =>
-                (e.target.style.color =
-                  active === item.name ? "#a3e635" : "#888")
+              (e.target.style.color =
+                active === item.name ? "#a3e635" : "#888")
               }
             >
               {item.name}
@@ -146,3 +146,4 @@ export const Navbar = () => {
     </nav>
   );
 };
+

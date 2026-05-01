@@ -2,24 +2,24 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const skills = [
-  { name: "HTML/CSS",    category: "frontend" },
+  { name: "HTML/CSS", category: "frontend" },
   { name: "JavaScript", category: "frontend" },
-  { name: "React",      category: "frontend" },
+  { name: "React", category: "frontend" },
   { name: "Tailwind CSS", category: "frontend" },
-  { name: "Node.js",    category: "backend" },
-  { name: "Express",    category: "backend" },
-  { name: "MongoDB",    category: "backend" },
+  { name: "Node.js", category: "backend" },
+  { name: "Express", category: "backend" },
+  { name: "MongoDB", category: "backend" },
   { name: "Git/GitHub", category: "tools" },
-  { name: "Figma",      category: "tools" },
-  { name: "VS Code",    category: "tools" },
+  { name: "Figma", category: "tools" },
+  { name: "VS Code", category: "tools" },
 ];
 
 const categories = ["all", "frontend", "backend", "tools"];
 
 const categoryColors = {
   frontend: "#a3e635",
-  backend:  "#38bdf8",
-  tools:    "#f472b6",
+  backend: "#38bdf8",
+  tools: "#f472b6",
 };
 
 export const SkillsSection = () => {

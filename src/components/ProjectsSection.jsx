@@ -21,6 +21,16 @@ const projects = [
     demoUrl: "https://cafe-finder-nu.vercel.app/",
     githubUrl: "https://github.com/Maaaccc05/Cafe-Finder",
   },
+  {
+    id: 3,
+    title: "Money Lending",
+    description:
+      "Developed a full-stack loan management platform for a real client to manage borrowers, lenders, and multi-lender loans. Implemented dynamic interest calculation based on annual rates with monthly, quarterly, and semi-annual cycles. Built features like lender-level settlement, interest tracking, and CSV report generation.",
+    image: "/projects/image3.png",
+    tags: ["React", "Tailwind", "Node.js", "MongoDB"],
+    demoUrl: "https://money-lending-alpha.vercel.app/",
+    githubUrl: "https://github.com/Maaaccc05/Money-Lending",
+  },
 ];
 
 export const ProjectsSection = () => {
