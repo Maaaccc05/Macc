@@ -33,7 +33,7 @@ export const AboutSection = () => {
           maxWidth: 700,
           height: 1,
           background:
-            "linear-gradient(90deg,transparent,rgba(163,230,53,0.25),transparent)",
+            "linear-gradient(90deg,transparent,var(--color-accent-dim),transparent)",
         }}
       />
 
@@ -45,7 +45,7 @@ export const AboutSection = () => {
               style={{
                 width: 16,
                 height: 1,
-                background: "#a3e635",
+                background: "var(--color-accent)",
                 display: "inline-block",
               }}
             />
@@ -57,13 +57,13 @@ export const AboutSection = () => {
               fontWeight: 800,
               letterSpacing: "-0.03em",
               lineHeight: 1.1,
-              color: "#f0f0f0",
+              color: "var(--color-text)",
             }}
           >
             Full Stack Developer<br />
             <span
               style={{
-                background: "linear-gradient(135deg,#a3e635,#65a30d)",
+                background: "linear-gradient(135deg,var(--color-accent),var(--color-accent-2))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -89,7 +89,7 @@ export const AboutSection = () => {
             <p
               style={{
                 fontSize: "1rem",
-                color: "#888",
+                color: "var(--color-muted)",
                 lineHeight: 1.8,
                 marginBottom: "2rem",
               }}
@@ -126,7 +126,7 @@ export const AboutSection = () => {
                 style={{
                   fontSize: "0.72rem",
                   fontFamily: "'JetBrains Mono', monospace",
-                  color: "#444",
+                  color: "var(--color-muted)",
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
                   marginBottom: "0.75rem",
@@ -138,7 +138,7 @@ export const AboutSection = () => {
                 style={{
                   fontSize: "0.72rem",
                   fontFamily: "'JetBrains Mono', monospace",
-                  color: "#444",
+                  color: "var(--color-muted)",
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
                 }}
@@ -159,31 +159,31 @@ export const AboutSection = () => {
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
                   <div
                     style={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 8,
-                      background: "rgba(163,230,53,0.08)",
-                      border: "1px solid rgba(163,230,53,0.15)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
+                          width: 36,
+                          height: 36,
+                          borderRadius: 8,
+                          background: "var(--color-accent-dim)",
+                          border: "1px solid rgba(223,208,184,0.15)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                        }}
                   >
-                    <Icon size={16} color="#a3e635" />
+                        <Icon size={16} color="var(--color-accent)" />
                   </div>
                   <div>
                     <h4
                       style={{
                         fontWeight: 600,
                         fontSize: "0.9rem",
-                        color: "#f0f0f0",
+                            color: "var(--color-text)",
                         marginBottom: "0.3rem",
                       }}
                     >
                       {title}
                     </h4>
-                    <p style={{ fontSize: "0.8rem", color: "#666", lineHeight: 1.6 }}>
+                    <p style={{ fontSize: "0.8rem", color: "var(--color-muted)", lineHeight: 1.6 }}>
                       {body}
                     </p>
                   </div>

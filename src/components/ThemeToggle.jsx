@@ -35,26 +35,19 @@ export const ThemeToggle = () => {
         height: 34,
         borderRadius: 8,
         border: "1px solid rgba(255,255,255,0.08)",
-        background: "rgba(17,17,17,0.8)",
+        background: "rgba(17,17,17,0.65)",
         backdropFilter: "blur(12px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         cursor: "pointer",
         transition: "border-color 0.2s",
+        color: isDark ? "var(--color-accent)" : "var(--color-muted)",
       }}
-      onMouseEnter={(e) =>
-        (e.currentTarget.style.borderColor = "rgba(163,230,53,0.3)")
-      }
-      onMouseLeave={(e) =>
-        (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")
-      }
+      onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--color-accent-dim)")}
+      onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
     >
-      {isDark ? (
-        <Sun size={15} color="#a3e635" />
-      ) : (
-        <Moon size={15} color="#888" />
-      )}
+      {isDark ? <Sun size={15} /> : <Moon size={15} />}
     </button>
   );
 };

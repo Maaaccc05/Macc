@@ -42,14 +42,14 @@ export const Navbar = () => {
               width: 28,
               height: 28,
               borderRadius: 6,
-              background: "#a3e635",
+              background: "var(--color-accent)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontFamily: "'JetBrains Mono', monospace",
               fontWeight: 700,
               fontSize: "0.7rem",
-              color: "#0a0a0a",
+              color: "var(--color-bg)",
               flexShrink: 0,
             }}
           >
@@ -59,11 +59,11 @@ export const Navbar = () => {
             style={{
               fontWeight: 600,
               fontSize: "0.95rem",
-              color: "#f0f0f0",
+              color: "var(--color-text)",
               letterSpacing: "-0.01em",
             }}
           >
-            Mayuresh<span style={{ color: "#a3e635" }}>.</span>
+            Mayuresh<span style={{ color: "var(--color-accent)" }}>.</span>
           </span>
         </a>
 
@@ -78,15 +78,15 @@ export const Navbar = () => {
                 fontSize: "0.82rem",
                 fontWeight: 500,
                 letterSpacing: "0.02em",
-                color: active === item.name ? "#a3e635" : "#888",
+                color: active === item.name ? "var(--color-accent)" : "var(--color-muted)",
                 textDecoration: "none",
                 transition: "color 0.2s",
                 position: "relative",
               }}
-              onMouseEnter={(e) => (e.target.style.color = "#f0f0f0")}
+              onMouseEnter={(e) => (e.target.style.color = "var(--color-text)")}
               onMouseLeave={(e) =>
               (e.target.style.color =
-                active === item.name ? "#a3e635" : "#888")
+                active === item.name ? "var(--color-accent)" : "var(--color-muted)")
               }
             >
               {item.name}
@@ -95,7 +95,7 @@ export const Navbar = () => {
         </div>
 
         {/* CTA */}
-        <a
+          <a
           href="#contact"
           className="hidden md:inline-flex btn-accent"
           style={{ fontSize: "0.8rem", padding: "0.45rem 1rem" }}
@@ -106,7 +106,7 @@ export const Navbar = () => {
         {/* Mobile hamburger */}
         <button
           onClick={() => setIsMenuOpen((p) => !p)}
-          className="md:hidden p-2 text-[#888] hover:text-white transition-colors"
+          className="md:hidden p-2 text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
           {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -124,7 +124,7 @@ export const Navbar = () => {
             : "opacity-0 pointer-events-none"
         )}
       >
-        <div className="flex flex-col gap-10 text-center">
+          <div className="flex flex-col gap-10 text-center">
           {navItems.map((item) => (
             <a
               key={item.name}
@@ -133,7 +133,7 @@ export const Navbar = () => {
               style={{
                 fontSize: "1.5rem",
                 fontWeight: 600,
-                color: active === item.name ? "#a3e635" : "#f0f0f0",
+                  color: active === item.name ? "var(--color-accent)" : "var(--color-text)",
                 textDecoration: "none",
                 transition: "color 0.2s",
               }}

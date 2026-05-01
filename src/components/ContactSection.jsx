@@ -13,8 +13,8 @@ const inputStyle = {
   padding: "0.75rem 1rem",
   borderRadius: 8,
   border: "1px solid rgba(255,255,255,0.08)",
-  background: "#111",
-  color: "#f0f0f0",
+  background: "var(--color-card)",
+  color: "var(--color-text)",
   fontSize: "0.88rem",
   fontFamily: "Inter, sans-serif",
   outline: "none",
@@ -56,7 +56,7 @@ export const ContactSection = () => {
           maxWidth: 600,
           height: 1,
           background:
-            "linear-gradient(90deg,transparent,rgba(163,230,53,0.3),transparent)",
+            "linear-gradient(90deg,transparent,var(--color-accent-dim),transparent)",
         }}
       />
 
@@ -68,7 +68,7 @@ export const ContactSection = () => {
               style={{
                 width: 16,
                 height: 1,
-                background: "#a3e635",
+                background: "var(--color-accent)",
                 display: "inline-block",
               }}
             />
@@ -79,7 +79,7 @@ export const ContactSection = () => {
               fontSize: "clamp(1.8rem,3.5vw,2.6rem)",
               fontWeight: 800,
               letterSpacing: "-0.03em",
-              color: "#f0f0f0",
+              color: "var(--color-text)",
               lineHeight: 1.1,
               marginBottom: "1rem",
             }}
@@ -87,7 +87,7 @@ export const ContactSection = () => {
             Get In{" "}
             <span
               style={{
-                background: "linear-gradient(135deg,#a3e635,#65a30d)",
+                background: "linear-gradient(135deg,var(--color-accent),var(--color-accent-2))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -99,7 +99,7 @@ export const ContactSection = () => {
           <p
             style={{
               fontSize: "0.95rem",
-              color: "#666",
+              color: "var(--color-muted)",
               maxWidth: 480,
               margin: "0 auto",
               lineHeight: 1.7,
@@ -125,18 +125,18 @@ export const ContactSection = () => {
             {/* Email card */}
             <div
               style={{
-                background: "#111",
-                border: "1px solid rgba(255,255,255,0.06)",
-                borderRadius: 12,
-                padding: "1.5rem",
-                marginBottom: "1.5rem",
-              }}
+                  background: "var(--color-card)",
+                  border: "1px solid var(--color-border)",
+                  borderRadius: 12,
+                  padding: "1.5rem",
+                  marginBottom: "1.5rem",
+                }}
             >
               <p
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
                   fontSize: "0.65rem",
-                  color: "#555",
+                  color: "var(--color-muted)",
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   marginBottom: "0.5rem",
@@ -149,11 +149,11 @@ export const ContactSection = () => {
                 style={{
                   fontSize: "0.9rem",
                   fontWeight: 500,
-                  color: "#a3e635",
+                  color: "var(--color-accent)",
                   textDecoration: "none",
                   transition: "opacity 0.2s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.75")}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
                 onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
               >
                 mackam30@gmail.com
@@ -163,17 +163,17 @@ export const ContactSection = () => {
             {/* Social links */}
             <div
               style={{
-                background: "#111",
-                border: "1px solid rgba(255,255,255,0.06)",
-                borderRadius: 12,
-                padding: "1.5rem",
-              }}
+                  background: "var(--color-card)",
+                  border: "1px solid var(--color-border)",
+                  borderRadius: 12,
+                  padding: "1.5rem",
+                }}
             >
               <p
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
                   fontSize: "0.65rem",
-                  color: "#555",
+                  color: "var(--color-muted)",
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   marginBottom: "1rem",
@@ -193,12 +193,12 @@ export const ContactSection = () => {
                       alignItems: "center",
                       gap: "0.75rem",
                       fontSize: "0.85rem",
-                      color: "#666",
+                      color: "var(--color-muted)",
                       textDecoration: "none",
                       transition: "color 0.2s",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#f0f0f0")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#666")}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-muted)")}
                   >
                     <Icon size={15} />
                     {label}
@@ -212,8 +212,8 @@ export const ContactSection = () => {
           <form
             onSubmit={handleSubmit}
             style={{
-              background: "#111",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "var(--color-card)",
+              border: "1px solid var(--color-border)",
               borderRadius: 12,
               padding: "2rem",
               display: "flex",
@@ -225,7 +225,7 @@ export const ContactSection = () => {
               style={{
                 fontSize: "1rem",
                 fontWeight: 700,
-                color: "#f0f0f0",
+                color: "var(--color-text)",
                 marginBottom: "0.25rem",
               }}
             >
@@ -238,7 +238,7 @@ export const ContactSection = () => {
                 style={{
                   fontSize: "0.72rem",
                   fontFamily: "'JetBrains Mono', monospace",
-                  color: "#555",
+                  color: "var(--color-muted)",
                   letterSpacing: "0.08em",
                   textTransform: "uppercase",
                 }}
@@ -252,7 +252,7 @@ export const ContactSection = () => {
                 required
                 placeholder="name"
                 style={inputStyle}
-                onFocus={(e) => (e.target.style.borderColor = "rgba(163,230,53,0.4)")}
+                onFocus={(e) => (e.target.style.borderColor = "var(--color-accent)")}
                 onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
               />
             </div>
@@ -277,7 +277,7 @@ export const ContactSection = () => {
                 required
                 placeholder="email"
                 style={inputStyle}
-                onFocus={(e) => (e.target.style.borderColor = "rgba(163,230,53,0.4)")}
+                onFocus={(e) => (e.target.style.borderColor = "var(--color-accent)")}
                 onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
               />
             </div>
@@ -306,7 +306,7 @@ export const ContactSection = () => {
                   resize: "vertical",
                   minHeight: 120,
                 }}
-                onFocus={(e) => (e.target.style.borderColor = "rgba(163,230,53,0.4)")}
+                onFocus={(e) => (e.target.style.borderColor = "var(--color-accent)")}
                 onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
               />
             </div>

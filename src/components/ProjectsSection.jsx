@@ -58,7 +58,7 @@ export const ProjectsSection = () => {
                 style={{
                   width: 16,
                   height: 1,
-                  background: "#a3e635",
+                  background: "var(--color-accent)",
                   display: "inline-block",
                 }}
               />
@@ -69,14 +69,14 @@ export const ProjectsSection = () => {
                 fontSize: "clamp(1.8rem,3.5vw,2.6rem)",
                 fontWeight: 800,
                 letterSpacing: "-0.03em",
-                color: "#f0f0f0",
+                color: "var(--color-text)",
                 lineHeight: 1.1,
               }}
             >
               Selected{" "}
               <span
-                style={{
-                  background: "linear-gradient(135deg,#a3e635,#65a30d)",
+                  style={{
+                  background: "linear-gradient(135deg,var(--color-accent),var(--color-accent-2))",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -110,8 +110,8 @@ export const ProjectsSection = () => {
             <div
               key={project.id}
               style={{
-                background: "#111",
-                border: "1px solid rgba(255,255,255,0.06)",
+                background: "var(--color-card)",
+                border: "1px solid var(--color-border)",
                 borderRadius: 12,
                 overflow: "hidden",
                 transition: "border-color 0.25s, transform 0.25s",
@@ -119,32 +119,32 @@ export const ProjectsSection = () => {
                 flexDirection: "column",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(163,230,53,0.25)";
+                  e.currentTarget.style.borderColor = "var(--color-accent-dim)";
                 e.currentTarget.style.transform = "translateY(-4px)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                  e.currentTarget.style.borderColor = "var(--color-border)";
                 e.currentTarget.style.transform = "translateY(0)";
               }}
             >
               {/* Image */}
               <div
-                style={{
-                  height: 190,
-                  overflow: "hidden",
-                  position: "relative",
-                  background: "#0d0d0d",
-                }}
+                  style={{
+                    height: 190,
+                    overflow: "hidden",
+                    position: "relative",
+                    background: "var(--color-surface)",
+                  }}
               >
                 <img
                   src={project.image}
                   alt={project.title}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    transition: "transform 0.5s",
-                  }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      transition: "transform 0.5s",
+                    }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.transform = "scale(1.05)")
                   }
@@ -154,26 +154,26 @@ export const ProjectsSection = () => {
                 />
                 {/* index badge */}
                 <div
-                  style={{
-                    position: "absolute",
-                    top: 12,
-                    left: 12,
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: "0.65rem",
-                    fontWeight: 700,
-                    color: "#0a0a0a",
-                    background: "#a3e635",
-                    padding: "2px 8px",
-                    borderRadius: 4,
-                    letterSpacing: "0.05em",
-                  }}
+                    style={{
+                      position: "absolute",
+                      top: 12,
+                      left: 12,
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.65rem",
+                      fontWeight: 700,
+                      color: "var(--color-bg)",
+                      background: "var(--color-accent)",
+                      padding: "2px 8px",
+                      borderRadius: 4,
+                      letterSpacing: "0.05em",
+                    }}
                 >
                   0{idx + 1}
                 </div>
               </div>
 
               {/* Content */}
-              <div style={{ padding: "1.25rem 1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
+                <div style={{ padding: "1.25rem 1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
                 {/* Tags */}
                 <div
                   style={{
@@ -191,10 +191,10 @@ export const ProjectsSection = () => {
                 </div>
 
                 <h3
-                  style={{
+                    style={{
                     fontSize: "1rem",
                     fontWeight: 700,
-                    color: "#f0f0f0",
+                    color: "var(--color-text)",
                     marginBottom: "0.4rem",
                     letterSpacing: "-0.01em",
                   }}
@@ -204,7 +204,7 @@ export const ProjectsSection = () => {
                 <p
                   style={{
                     fontSize: "0.82rem",
-                    color: "#666",
+                    color: "var(--color-muted)",
                     lineHeight: 1.65,
                     flex: 1,
                   }}
@@ -232,11 +232,11 @@ export const ProjectsSection = () => {
                       gap: "0.35rem",
                       fontSize: "0.78rem",
                       fontWeight: 500,
-                      color: "#a3e635",
+                      color: "var(--color-accent)",
                       textDecoration: "none",
                       transition: "opacity 0.2s",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.75")}
+                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
                     onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                   >
                     <ExternalLink size={13} />
@@ -252,12 +252,12 @@ export const ProjectsSection = () => {
                       gap: "0.35rem",
                       fontSize: "0.78rem",
                       fontWeight: 500,
-                      color: "#666",
+                      color: "var(--color-muted)",
                       textDecoration: "none",
                       transition: "color 0.2s",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#f0f0f0")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#666")}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-muted)")}
                   >
                     <Github size={13} />
                     Source code

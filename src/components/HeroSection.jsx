@@ -4,7 +4,7 @@ export const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 grid-bg overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
     >
       {/* Radial glow */}
       <div
@@ -18,7 +18,7 @@ export const HeroSection = () => {
           height: 600,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(163,230,53,0.07) 0%, transparent 70%)",
+            "radial-gradient(circle, var(--color-accent-dim) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
@@ -35,7 +35,7 @@ export const HeroSection = () => {
                 width: 6,
                 height: 6,
                 borderRadius: "50%",
-                background: "#a3e635",
+                background: "var(--color-accent)",
                 display: "inline-block",
                 animation: "pulse-subtle 2s ease-in-out infinite",
               }}
@@ -57,8 +57,8 @@ export const HeroSection = () => {
         >
           Hi, I'm{" "}
           <span
-            style={{
-              background: "linear-gradient(135deg,#a3e635,#65a30d)",
+              style={{
+              background: "linear-gradient(135deg,var(--color-accent),var(--color-accent-2))",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -73,9 +73,9 @@ export const HeroSection = () => {
         {/* Sub */}
         <p
           className="opacity-0 animate-fade-in-delay-2"
-          style={{
+            style={{
             fontSize: "clamp(1rem, 2vw, 1.15rem)",
-            color: "#888",
+            color: "var(--color-muted)",
             maxWidth: 520,
             marginBottom: "2.5rem",
             lineHeight: 1.7,
@@ -119,7 +119,7 @@ export const HeroSection = () => {
                 style={{
                   fontSize: "1.6rem",
                   fontWeight: 800,
-                  color: "#f0f0f0",
+                  color: "var(--color-text)",
                   letterSpacing: "-0.03em",
                   lineHeight: 1,
                 }}
@@ -129,7 +129,7 @@ export const HeroSection = () => {
               <div
                 style={{
                   fontSize: "0.75rem",
-                  color: "#555",
+                  color: "var(--color-muted)",
                   marginTop: "0.25rem",
                   fontFamily: "'JetBrains Mono', monospace",
                   letterSpacing: "0.05em",
@@ -161,13 +161,13 @@ export const HeroSection = () => {
             fontSize: "0.65rem",
             fontFamily: "'JetBrains Mono', monospace",
             letterSpacing: "0.15em",
-            color: "#444",
+            color: "var(--color-muted)",
             textTransform: "uppercase",
           }}
         >
           scroll
         </span>
-        <ArrowDown size={14} color="#444" />
+        <ArrowDown size={14} color="var(--color-muted)" />
       </div>
     </section>
   );

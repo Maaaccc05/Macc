@@ -17,7 +17,7 @@ const skills = [
 const categories = ["all", "frontend", "backend", "tools"];
 
 const categoryColors = {
-  frontend: "#a3e635",
+  frontend: "var(--color-accent)",
   backend: "#38bdf8",
   tools: "#f472b6",
 };
@@ -35,18 +35,7 @@ export const SkillsSection = () => {
       className="py-24 px-4 relative"
       style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}
     >
-      {/* Grid bg only this section */}
-      <div
-        aria-hidden
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px)",
-          backgroundSize: "60px 60px",
-          pointerEvents: "none",
-        }}
-      />
+      {/* Grid removed to keep layout simple */}
 
       <div className="container mx-auto max-w-5xl" style={{ position: "relative" }}>
         {/* Header */}
@@ -62,7 +51,7 @@ export const SkillsSection = () => {
         >
           <div>
             <span className="section-label">
-              <span style={{ width: 16, height: 1, background: "#a3e635", display: "inline-block" }} />
+              <span style={{ width: 16, height: 1, background: "var(--color-accent)", display: "inline-block" }} />
               Expertise
             </span>
             <h2
@@ -70,14 +59,14 @@ export const SkillsSection = () => {
                 fontSize: "clamp(1.8rem,3.5vw,2.6rem)",
                 fontWeight: 800,
                 letterSpacing: "-0.03em",
-                color: "#f0f0f0",
+                color: "var(--color-text)",
                 lineHeight: 1.1,
               }}
             >
               My{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg,#a3e635,#65a30d)",
+                  background: "linear-gradient(135deg,var(--color-accent),var(--color-accent-2))",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -90,10 +79,10 @@ export const SkillsSection = () => {
 
           {/* Filter tabs */}
           <div
-            style={{
+                style={{
               display: "flex",
               gap: "0.4rem",
-              background: "#111",
+              background: "var(--color-card)",
               border: "1px solid rgba(255,255,255,0.07)",
               borderRadius: 8,
               padding: "0.25rem",
@@ -114,8 +103,8 @@ export const SkillsSection = () => {
                   cursor: "pointer",
                   transition: "background 0.2s, color 0.2s",
                   background:
-                    active === cat ? "#a3e635" : "transparent",
-                  color: active === cat ? "#0a0a0a" : "#666",
+                    active === cat ? "var(--color-accent)" : "transparent",
+                    color: active === cat ? "#0a0a0a" : "var(--color-muted)",
                 }}
               >
                 {cat}
@@ -135,9 +124,9 @@ export const SkillsSection = () => {
           {filtered.map((skill) => (
             <div
               key={skill.name}
-              style={{
-                background: "#111",
-                border: "1px solid rgba(255,255,255,0.06)",
+                style={{
+                background: "var(--color-card)",
+                border: "1px solid var(--color-border)",
                 borderRadius: 10,
                 padding: "1.1rem 1.25rem",
                 display: "flex",
@@ -157,10 +146,10 @@ export const SkillsSection = () => {
               }}
             >
               <span
-                style={{
+                  style={{
                   fontSize: "0.88rem",
                   fontWeight: 600,
-                  color: "#d4d4d4",
+                  color: "var(--color-text)",
                 }}
               >
                 {skill.name}

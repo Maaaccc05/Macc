@@ -6,13 +6,22 @@
   --color-bg: #0a0a0a;
   --color-surface: #111111;
   --color-surface2: #171717;
-  --color-border: rgba(255, 255, 255, 0.07);
-  --color-accent: #a3e635;
-  /* lime-400 */
-  --color-accent-dim: rgba(163, 230, 53, 0.08);
-  --color-text: #f0f0f0;
-  --color-muted: #666666;
-  --color-card: #111111;
+  /* Palette (from user image) */
+  --palette-1: #222831; /* darkest */
+  --palette-2: #393E46; /* surface */
+  --palette-3: #948979; /* warm mid */
+  --palette-4: #DFD0B8; /* accent / light */
+
+  --color-bg: var(--palette-1);
+  --color-surface: var(--palette-2);
+  --color-surface2: var(--palette-3);
+  --color-border: rgba(223, 208, 184, 0.07);
+  --color-accent: var(--palette-4);
+  --color-accent-2: var(--palette-3);
+  --color-accent-dim: rgba(223, 208, 184, 0.08);
+  --color-text: #F6F3EE;
+  --color-muted: #BFB6A8;
+  --color-card: var(--palette-2);
 
   /* Legacy shadcn vars kept for toaster compat */
   --color-background: hsl(var(--background));
@@ -144,8 +153,8 @@
   }
 
   ::selection {
-    background: rgba(163, 230, 53, 0.25);
-    color: #fff;
+    background: var(--color-accent-dim);
+    color: var(--color-bg);
   }
 
   ::-webkit-scrollbar {
@@ -199,7 +208,7 @@
 
 /* ── Utility: Accent gradient text ──────────────────────── */
 @utility accent-text {
-  background: linear-gradient(135deg, #a3e635 0%, #65a30d 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-2) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -207,10 +216,9 @@
 
 /* ── Utility: Grid lines bg ─────────────────────────────── */
 @utility grid-bg {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
+  /* Removed grid lines to keep the design simple */
+  background-image: none;
+  background-size: auto;
 }
 
 /* ── Utility: Section label ─────────────────────────────── */
