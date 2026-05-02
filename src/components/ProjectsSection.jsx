@@ -42,7 +42,6 @@ export const ProjectsSection = () => {
     >
       <div className="container mx-auto max-w-5xl">
         {/* Header */}
-        
         <div
           style={{
             display: "flex",
