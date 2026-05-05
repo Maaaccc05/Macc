@@ -1,6 +1,4 @@
-import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -12,45 +10,101 @@ const navItems = [
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [active, setActive] = useState("Home");
+  const [indicatorStyle, setIndicatorStyle] = useState({});
+  const navRef = useRef(null);
+  const itemRefs = useRef({});
 
+  /* ── Scroll detection ──────────────────────── */
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  /* ── Slide indicator position ──────────────── */
+  useEffect(() => {
+    const el = itemRefs.current[active];
+    if (el && navRef.current) {
+      const navRect = navRef.current.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      setIndicatorStyle({
+        width: elRect.width,
+        transform: `translateX(${elRect.left - navRect.left}px)`,
+      });
+    }
+  }, [active]);
+
   return (
-    <nav
-      className={cn(
-        "fixed w-full z-40 transition-all duration-500",
-        isScrolled
-          ? "py-3 border-b border-white/5 backdrop-blur-xl bg-[#0a0a0a]/80"
-          : "py-5"
-      )}
+    <div
+      style={{
+        position: "fixed",
+        top: isScrolled ? "1rem" : "1.4rem",
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        transition: "top 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+        pointerEvents: "none",
+        paddingInline: "1rem",
+      }}
     >
-      <div className="container flex items-center justify-between">
-        {/* Logo */}
+      {/* ── Pill shell ── */}
+      <nav
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.25rem",
+          padding: "0.35rem 0.5rem",
+          borderRadius: "9999px",
+          background: isScrolled
+            ? "rgba(34, 40, 49, 0.82)"
+            : "rgba(34, 40, 49, 0.55)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          border: isScrolled
+            ? "1px solid rgba(223, 208, 184, 0.22)"
+            : "1px solid rgba(223, 208, 184, 0.09)",
+          boxShadow: isScrolled
+            ? "0 0 0 1px rgba(223,208,184,0.06), 0 8px 32px rgba(0,0,0,0.45), 0 0 60px -12px rgba(223,208,184,0.12)"
+            : "0 4px 24px rgba(0,0,0,0.25)",
+          transition: "all 0.45s cubic-bezier(0.16, 1, 0.3, 1)",
+          pointerEvents: "auto",
+          maxWidth: "100%",
+        }}
+      >
+        {/* Logo badge */}
         <a
           href="#hero"
-          className="flex items-center gap-2 group"
-          style={{ textDecoration: "none" }}
+          onClick={() => setActive("Home")}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.4rem",
+            textDecoration: "none",
+            padding: "0.3rem 0.65rem 0.3rem 0.4rem",
+            borderRadius: "9999px",
+            marginRight: "0.25rem",
+            flexShrink: 0,
+          }}
         >
           <span
             style={{
-              width: 28,
-              height: 28,
-              borderRadius: 6,
+              width: 26,
+              height: 26,
+              borderRadius: "50%",
               background: "var(--color-accent)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontFamily: "'JetBrains Mono', monospace",
               fontWeight: 700,
-              fontSize: "0.7rem",
+              fontSize: "0.62rem",
               color: "var(--color-bg)",
               flexShrink: 0,
+              letterSpacing: "0.02em",
             }}
           >
             MK
@@ -58,92 +112,86 @@ export const Navbar = () => {
           <span
             style={{
               fontWeight: 600,
-              fontSize: "0.95rem",
+              fontSize: "0.82rem",
               color: "var(--color-text)",
               letterSpacing: "-0.01em",
+              whiteSpace: "nowrap",
             }}
           >
             Mayuresh<span style={{ color: "var(--color-accent)" }}>.</span>
           </span>
         </a>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Thin vertical divider */}
+        <div
+          style={{
+            width: 1,
+            height: 18,
+            background: "rgba(223,208,184,0.15)",
+            borderRadius: 9999,
+            flexShrink: 0,
+            marginRight: "0.15rem",
+          }}
+        />
+
+        {/* Nav items with sliding indicator */}
+        <div
+          ref={navRef}
+          style={{ position: "relative", display: "flex", alignItems: "center", gap: "0" }}
+        >
+          {/* Sliding pill indicator */}
+          <span
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              height: "100%",
+              background: "rgba(223, 208, 184, 0.1)",
+              borderRadius: "9999px",
+              border: "1px solid rgba(223,208,184,0.14)",
+              transition:
+                "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)",
+              pointerEvents: "none",
+              ...indicatorStyle,
+            }}
+          />
+
           {navItems.map((item) => (
             <a
               key={item.name}
               href={item.href}
+              ref={(el) => (itemRefs.current[item.name] = el)}
               onClick={() => setActive(item.name)}
               style={{
-                fontSize: "0.82rem",
-                fontWeight: 500,
-                letterSpacing: "0.02em",
-                color: active === item.name ? "var(--color-accent)" : "var(--color-muted)",
-                textDecoration: "none",
-                transition: "color 0.2s",
                 position: "relative",
-              }}
-              onMouseEnter={(e) => (e.target.style.color = "var(--color-text)")}
-              onMouseLeave={(e) =>
-              (e.target.style.color =
-                active === item.name ? "var(--color-accent)" : "var(--color-muted)")
-              }
-            >
-              {item.name}
-            </a>
-          ))}
-        </div>
-
-        {/* CTA */}
-          <a
-          href="#contact"
-          className="hidden md:inline-flex btn-accent"
-          style={{ fontSize: "0.8rem", padding: "0.45rem 1rem" }}
-        >
-          Hire me
-        </a>
-
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setIsMenuOpen((p) => !p)}
-          className="md:hidden p-2 text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </div>
-
-      {/* Mobile drawer */}
-      <div
-        className={cn(
-          "fixed inset-0 z-40 md:hidden flex flex-col items-center justify-center",
-          "transition-all duration-300",
-          "bg-[#0a0a0a]/97 backdrop-blur-xl",
-          isMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        )}
-      >
-          <div className="flex flex-col gap-10 text-center">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={() => { setActive(item.name); setIsMenuOpen(false); }}
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: 600,
-                  color: active === item.name ? "var(--color-accent)" : "var(--color-text)",
+                fontSize: "0.8rem",
+                fontWeight: active === item.name ? 600 : 500,
+                letterSpacing: "0.01em",
+                color:
+                  active === item.name
+                    ? "var(--color-accent)"
+                    : "var(--color-muted)",
                 textDecoration: "none",
-                transition: "color 0.2s",
+                padding: "0.42rem 0.85rem",
+                borderRadius: "9999px",
+                transition: "color 0.25s",
+                whiteSpace: "nowrap",
+                zIndex: 1,
+              }}
+              onMouseEnter={(e) => {
+                if (active !== item.name)
+                  e.currentTarget.style.color = "var(--color-text)";
+              }}
+              onMouseLeave={(e) => {
+                if (active !== item.name)
+                  e.currentTarget.style.color = "var(--color-muted)";
               }}
             >
               {item.name}
             </a>
           ))}
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
-

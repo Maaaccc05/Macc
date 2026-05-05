@@ -27,22 +27,6 @@ export const HeroSection = () => {
         className="container max-w-4xl mx-auto z-10"
         style={{ textAlign: "left" }}
       >
-        {/* Label */}
-        <div className="opacity-0 animate-fade-in" style={{ marginBottom: "1.5rem" }}>
-          <span className="section-label">
-            <span
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                background: "var(--color-accent)",
-                display: "inline-block",
-                animation: "pulse-subtle 2s ease-in-out infinite",
-              }}
-            />
-            Available for work
-          </span>
-        </div>
 
         {/* Headline */}
         <h1
@@ -57,7 +41,7 @@ export const HeroSection = () => {
         >
           Hi, I'm{" "}
           <span
-              style={{
+            style={{
               background: "linear-gradient(135deg,var(--color-accent),var(--color-accent-2))",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -73,7 +57,7 @@ export const HeroSection = () => {
         {/* Sub */}
         <p
           className="opacity-0 animate-fade-in-delay-2"
-            style={{
+          style={{
             fontSize: "clamp(1rem, 2vw, 1.15rem)",
             color: "var(--color-muted)",
             maxWidth: 520,
