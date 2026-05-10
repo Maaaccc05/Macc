@@ -1,4 +1,4 @@
-import { Briefcase, Code, Brain } from "lucide-react";
+import { Code, Brain } from "lucide-react";
 
 const cards = [
   {
@@ -10,11 +10,6 @@ const cards = [
     icon: Brain,
     title: "Machine Learning",
     body: "Currently learning machine learning and exploring how to integrate intelligent features into web applications.",
-  },
-  {
-    icon: Briefcase,
-    title: "Full Stack",
-    body: "Comfortable across the entire MERN stack — from database design to polished UIs.",
   },
 ];
 
@@ -114,38 +109,7 @@ export const AboutSection = () => {
               </a>
             </div>
 
-            {/* Thin separator */}
-            <div
-              style={{
-                marginTop: "2.5rem",
-                paddingTop: "2rem",
-                borderTop: "1px solid rgba(255,255,255,0.05)",
-              }}
-            >
-              <p
-                style={{
-                  fontSize: "0.72rem",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  color: "var(--color-muted)",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                Currently based in India
-              </p>
-              <p
-                style={{
-                  fontSize: "0.72rem",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  color: "var(--color-muted)",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Open to remote &amp; on-site roles
-              </p>
-            </div>
+
           </div>
 
           {/* Right: cards */}

@@ -1,43 +1,37 @@
-import { Instagram, Linkedin, Mail, Send, Twitter } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { Instagram, Linkedin, Mail, Twitter } from "lucide-react";
 
 const socials = [
-  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/mayuresh-kamble-79ba97306/" },
-  { icon: Twitter, label: "X", href: "https://x.com/macck69" },
-  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/maaacccc2?igsh=cXE0MTB0M2I5cDNy" },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    handle: "mayuresh-kamble",
+    href: "https://www.linkedin.com/in/mayuresh-kamble-79ba97306/",
+    color: "#0A66C2",
+  },
+  {
+    icon: Twitter,
+    label: "X (Twitter)",
+    handle: "@macck69",
+    href: "https://x.com/macck69",
+    color: "#e2e8f0",
+  },
+  {
+    icon: Instagram,
+    label: "Instagram",
+    handle: "@maaacccc2",
+    href: "https://www.instagram.com/maaacccc2?igsh=cXE0MTB0M2I5cDNy",
+    color: "#E1306C",
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    handle: "mackam30@gmail.com",
+    href: "mailto:mackam30@gmail.com",
+    color: "var(--color-accent)",
+  },
 ];
 
-const inputStyle = {
-  width: "100%",
-  padding: "0.75rem 1rem",
-  borderRadius: 8,
-  border: "1px solid rgba(255,255,255,0.08)",
-  background: "var(--color-card)",
-  color: "var(--color-text)",
-  fontSize: "0.88rem",
-  fontFamily: "Inter, sans-serif",
-  outline: "none",
-  transition: "border-color 0.2s",
-};
-
 export const ContactSection = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
-      });
-      setIsSubmitting(false);
-      e.target.reset();
-    }, 1500);
-  };
-
   return (
     <section
       id="contact"
@@ -60,9 +54,26 @@ export const ContactSection = () => {
         }}
       />
 
-      <div className="container mx-auto max-w-5xl">
+      {/* Ambient glow */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 500,
+          height: 500,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, var(--color-accent-dim) 0%, transparent 70%)",
+          opacity: 0.15,
+          pointerEvents: "none",
+        }}
+      />
+
+      <div className="container mx-auto max-w-3xl" style={{ position: "relative" }}>
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+        <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
           <span className="section-label" style={{ justifyContent: "center" }}>
             <span
               style={{
@@ -84,248 +95,138 @@ export const ContactSection = () => {
               marginBottom: "1rem",
             }}
           >
-            Get In{" "}
+            Let&apos;s{" "}
             <span
               style={{
-                background: "linear-gradient(135deg,var(--color-accent),var(--color-accent-2))",
+                background:
+                  "linear-gradient(135deg,var(--color-accent),var(--color-accent-2))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}
             >
-              Touch
+              Connect
             </span>
           </h2>
           <p
             style={{
               fontSize: "0.95rem",
               color: "var(--color-muted)",
-              maxWidth: 480,
+              maxWidth: 440,
               margin: "0 auto",
-              lineHeight: 1.7,
+              lineHeight: 1.75,
             }}
           >
-            Have a project in mind or want to collaborate? Feel free to reach
-            out. I'm always open to discussing new opportunities.
+            Open to new opportunities, collaborations, and interesting
+            conversations. Pick your preferred channel and say hello.
           </p>
         </div>
 
-        {/* Two columns */}
+        {/* Social cards grid */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1.4fr",
-            gap: "3rem",
-            alignItems: "start",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "1rem",
           }}
-          className="max-md:!grid-cols-1"
+          className="max-sm:!grid-cols-1"
         >
-          {/* Left: info */}
-          <div>
-            {/* Email card */}
-            <div
+          {socials.map(({ icon: Icon, label, handle, href, color }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith("mailto") ? "_self" : "_blank"}
+              rel="noopener noreferrer"
               style={{
-                  background: "var(--color-card)",
-                  border: "1px solid var(--color-border)",
-                  borderRadius: 12,
-                  padding: "1.5rem",
-                  marginBottom: "1.5rem",
-                }}
+                display: "flex",
+                alignItems: "center",
+                gap: "1rem",
+                padding: "1.25rem 1.5rem",
+                background: "var(--color-card)",
+                border: "1px solid var(--color-border)",
+                borderRadius: 14,
+                textDecoration: "none",
+                transition:
+                  "transform 0.22s cubic-bezier(0.34,1.56,0.64,1), border-color 0.22s, box-shadow 0.22s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-3px)";
+                e.currentTarget.style.borderColor = color;
+                e.currentTarget.style.boxShadow = `0 8px 32px -8px ${color}40`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.borderColor = "var(--color-border)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
             >
-              <p
+              {/* Icon bubble */}
+              <span
                 style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: "0.65rem",
-                  color: "var(--color-muted)",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  marginBottom: "0.5rem",
+                  width: 44,
+                  height: 44,
+                  borderRadius: "50%",
+                  background: `${color}18`,
+                  border: `1px solid ${color}30`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                  color: color,
+                  transition: "background 0.22s",
                 }}
               >
-                Email
-              </p>
-              <a
-                href="mailto:mackam30@gmail.com"
-                style={{
-                  fontSize: "0.9rem",
-                  fontWeight: 500,
-                  color: "var(--color-accent)",
-                  textDecoration: "none",
-                  transition: "opacity 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-              >
-                mackam30@gmail.com
-              </a>
-            </div>
+                <Icon size={18} />
+              </span>
 
-            {/* Social links */}
-            <div
-              style={{
-                  background: "var(--color-card)",
-                  border: "1px solid var(--color-border)",
-                  borderRadius: 12,
-                  padding: "1.5rem",
-                }}
-            >
-              <p
-                style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: "0.65rem",
-                  color: "var(--color-muted)",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  marginBottom: "1rem",
-                }}
-              >
-                Social
-              </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                {socials.map(({ icon: Icon, label, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.75rem",
-                      fontSize: "0.85rem",
-                      color: "var(--color-muted)",
-                      textDecoration: "none",
-                      transition: "color 0.2s",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-muted)")}
-                  >
-                    <Icon size={15} />
-                    {label}
-                  </a>
-                ))}
+              {/* Text */}
+              <div>
+                <p
+                  style={{
+                    fontSize: "0.82rem",
+                    fontWeight: 700,
+                    color: "var(--color-text)",
+                    marginBottom: "0.15rem",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {label}
+                </p>
+                <p
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "var(--color-muted)",
+                    fontFamily: "'JetBrains Mono', monospace",
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {handle}
+                </p>
               </div>
-            </div>
-          </div>
 
-          {/* Right: form */}
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              background: "var(--color-card)",
-              border: "1px solid var(--color-border)",
-              borderRadius: 12,
-              padding: "2rem",
-              display: "flex",
-              flexDirection: "column",
-              gap: "1.25rem",
-            }}
-          >
-            <h3
-              style={{
-                fontSize: "1rem",
-                fontWeight: 700,
-                color: "var(--color-text)",
-                marginBottom: "0.25rem",
-              }}
-            >
-              Send a Message
-            </h3>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-              <label
-                htmlFor="name"
+              {/* Arrow */}
+              <svg
                 style={{
-                  fontSize: "0.72rem",
-                  fontFamily: "'JetBrains Mono', monospace",
+                  marginLeft: "auto",
                   color: "var(--color-muted)",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
+                  opacity: 0.5,
+                  flexShrink: 0,
                 }}
+                width={14}
+                height={14}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                Your Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                placeholder="name"
-                style={inputStyle}
-                onFocus={(e) => (e.target.style.borderColor = "var(--color-accent)")}
-                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
-              />
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-              <label
-                htmlFor="email"
-                style={{
-                  fontSize: "0.72rem",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  color: "#555",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Your Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                placeholder="email"
-                style={inputStyle}
-                onFocus={(e) => (e.target.style.borderColor = "var(--color-accent)")}
-                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
-              />
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-              <label
-                htmlFor="message"
-                style={{
-                  fontSize: "0.72rem",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  color: "#555",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                placeholder="Hello, I'd like to talk about..."
-                style={{
-                  ...inputStyle,
-                  resize: "vertical",
-                  minHeight: 120,
-                }}
-                onFocus={(e) => (e.target.style.borderColor = "var(--color-accent)")}
-                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="btn-accent"
-              style={{
-                justifyContent: "center",
-                opacity: isSubmitting ? 0.6 : 1,
-                cursor: isSubmitting ? "not-allowed" : "pointer",
-              }}
-            >
-              {isSubmitting ? "Sending…" : "Send Message"}
-              <Send size={14} />
-            </button>
-          </form>
+                <path d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
+            </a>
+          ))}
         </div>
+
       </div>
     </section>
   );
