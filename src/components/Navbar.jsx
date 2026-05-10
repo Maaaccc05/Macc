@@ -18,8 +18,59 @@ export const Navbar = () => {
   /* ── Scroll detection ──────────────────────── */
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* ── Scroll-spy: update active item based on visible section ── */
+  useEffect(() => {
+    const sectionIds = navItems.map((item) => item.href.replace("#", ""));
+
+    const observers = [];
+
+    // Use a map to track intersection ratios per section
+    const visibilityMap = {};
+
+    const pickMostVisible = () => {
+      let bestId = null;
+      let bestRatio = 0;
+      for (const id of sectionIds) {
+        const ratio = visibilityMap[id] ?? 0;
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestId = id;
+        }
+      }
+      if (bestId) {
+        const matched = navItems.find(
+          (item) => item.href === `#${bestId}`
+        );
+        if (matched) setActive(matched.name);
+      }
+    };
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          visibilityMap[id] = entry.intersectionRatio;
+          pickMostVisible();
+        },
+        {
+          root: null,
+          // Observe a generous middle band of the viewport
+          rootMargin: "-10% 0px -10% 0px",
+          threshold: Array.from({ length: 21 }, (_, i) => i * 0.05),
+        }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((obs) => obs.disconnect());
   }, []);
 
   /* ── Slide indicator position ──────────────── */
