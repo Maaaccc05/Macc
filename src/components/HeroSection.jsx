@@ -78,9 +78,6 @@ export const HeroSection = () => {
           <a href="#projects" className="btn-accent">
             View my work <ArrowRight size={14} />
           </a>
-          <a href="#contact" className="btn-ghost">
-            Get in touch
-          </a>
         </div>
 
         {/* Stats row */}
@@ -94,9 +91,8 @@ export const HeroSection = () => {
           }}
         >
           {[
-            { value: "2+", label: "Years coding" },
-            { value: "5+", label: "Projects shipped" },
-            { value: "MERN", label: "Stack" },
+            { value: "3", label: "Years coding" },
+            { value: "7+", label: "Projects completed" },
           ].map(({ value, label }) => (
             <div key={label}>
               <div

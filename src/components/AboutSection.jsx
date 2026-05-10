@@ -96,12 +96,9 @@ export const AboutSection = () => {
             </p>
 
             <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-              <a href="#contact" className="btn-accent">
-                Get in touch
-              </a>
               <a
                 href="/resume.pdf"
-                className="btn-ghost"
+                className="btn-accent"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -123,25 +120,25 @@ export const AboutSection = () => {
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
                   <div
                     style={{
-                          width: 36,
-                          height: 36,
-                          borderRadius: 8,
-                          background: "var(--color-accent-dim)",
-                          border: "1px solid rgba(223,208,184,0.15)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          flexShrink: 0,
-                        }}
+                      width: 36,
+                      height: 36,
+                      borderRadius: 8,
+                      background: "var(--color-accent-dim)",
+                      border: "1px solid rgba(223,208,184,0.15)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
                   >
-                        <Icon size={16} color="var(--color-accent)" />
+                    <Icon size={16} color="var(--color-accent)" />
                   </div>
                   <div>
                     <h4
                       style={{
                         fontWeight: 600,
                         fontSize: "0.9rem",
-                            color: "var(--color-text)",
+                        color: "var(--color-text)",
                         marginBottom: "0.3rem",
                       }}
                     >
