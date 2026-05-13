@@ -1,262 +1,223 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-/*
-  Animation timeline
-  ─────────────────────────────────────────────
-  0    ms  → mount
-  80   ms  → Phase 1 : MK badge bounces in
-  550  ms  → Phase 2 : SVG orbit ring starts drawing
-  1950 ms  → Phase 3 : ring complete → glow pulses, name slides in
-  2500 ms  → Phase 4 : tagline fades in
-  3100 ms  → Phase 5 : iris-wipe exit begins
-  3800 ms  → Phase 6 : done / unmount
-*/
+/* ── Keyframes injected once ───────────────────────────────── */
+const KEYFRAMES = `
+  @keyframes orb-1 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    35%     { transform: translate(40px,-30px) scale(1.06); }
+    68%     { transform: translate(-20px,35px) scale(0.96); }
+  }
+  @keyframes orb-2 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    40%     { transform: translate(-35px,25px) scale(1.04); }
+    72%     { transform: translate(25px,-40px) scale(0.97); }
+  }
+  @keyframes orb-3 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50%     { transform: translate(20px,20px) scale(1.08); }
+  }
+  @keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(400%); }
+  }
+  @keyframes soft-pulse {
+    0%,100% { opacity: 0.55; }
+    50%     { opacity: 1; }
+  }
+`;
 
-const NAME = "Mayuresh Kamble";
-const TAGLINE = "Full Stack  ·  ML Enthusiast";
-const RING_R = 62;                       // SVG ring radius
-const CIRCUMFERENCE = 2 * Math.PI * RING_R; // ≈ 389.6
+/* ── Timeline ──────────────────────────────────────────────── */
+const T_NAME    = 300;
+const T_DIVIDER = 1200;
+const T_ROLE    = 1450;
+const T_SHIMMER = 1750;
+const T_EXIT    = 3100;
+const T_DONE    = 3850;
 
 export const LoadingScreen = ({ onComplete }) => {
-  const [phase, setPhase] = useState(0);
-  const [ringProgress, setRingProgress] = useState(0); // 0–1
-  const ringRafRef = useRef(null);
-  const ringStartRef = useRef(null);
-  const RING_DURATION = 1350; // ms to draw the full ring
+  const [phase, setPhase]     = useState(0);
+  const [exiting, setExiting] = useState(false);
+  const [done, setDone]       = useState(false);
 
-  /* ── Phase scheduler ── */
   useEffect(() => {
-    const timers = [
-      setTimeout(() => setPhase(1), 80),
-      setTimeout(() => setPhase(2), 550),
-      setTimeout(() => setPhase(3), 550 + RING_DURATION + 50),
-      setTimeout(() => setPhase(4), 550 + RING_DURATION + 500),
-      setTimeout(() => setPhase(5), 3100),
-      setTimeout(() => { setPhase(6); onComplete?.(); }, 3800),
+    const ts = [
+      setTimeout(() => setPhase(1), T_NAME),
+      setTimeout(() => setPhase(2), T_DIVIDER),
+      setTimeout(() => setPhase(3), T_ROLE),
+      setTimeout(() => setPhase(4), T_SHIMMER),
+      setTimeout(() => setExiting(true), T_EXIT),
+      setTimeout(() => { setDone(true); onComplete?.(); }, T_DONE),
     ];
-    return () => timers.forEach(clearTimeout);
+    return () => ts.forEach(clearTimeout);
   }, [onComplete]);
 
-  /* ── Ring drawing via rAF ── */
-  useEffect(() => {
-    if (phase !== 2) return;
-    ringStartRef.current = null;
-
-    const tick = (ts) => {
-      if (!ringStartRef.current) ringStartRef.current = ts;
-      const elapsed = ts - ringStartRef.current;
-      const t = Math.min(elapsed / RING_DURATION, 1);
-      // Ease-in-out
-      const eased = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-      setRingProgress(eased);
-      if (t < 1) ringRafRef.current = requestAnimationFrame(tick);
-    };
-
-    ringRafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(ringRafRef.current);
-  }, [phase]);
-
-  if (phase === 6) return null;
-
-  const ringOffset = CIRCUMFERENCE * (1 - ringProgress);
-  const glowing = phase >= 3;
-  const exiting = phase === 5;
+  if (done) return null;
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        background: "#0D1117",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 0,
-        /* ── Iris-wipe exit ── */
-        clipPath: exiting ? "circle(0% at 50% 50%)" : "circle(150% at 50% 50%)",
-        transition: exiting
-          ? "clip-path 0.68s cubic-bezier(0.76, 0, 0.24, 1)"
-          : "none",
-        pointerEvents: exiting ? "none" : "auto",
-        overflow: "hidden",
-      }}
-    >
-      {/* ── Noise texture overlay ── */}
+    <>
+      <style>{KEYFRAMES}</style>
+
       <div
         style={{
-          position: "absolute",
+          position: "fixed",
           inset: 0,
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E\")",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* ── Ambient glow behind badge ── */}
-      <div
-        style={{
-          position: "absolute",
-          width: 280,
-          height: 280,
-          borderRadius: "50%",
-          background: glowing
-            ? "radial-gradient(circle, rgba(223,208,184,0.14) 0%, transparent 70%)"
-            : "radial-gradient(circle, rgba(223,208,184,0.05) 0%, transparent 70%)",
-          transition: "background 0.8s ease",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* ── SVG ring + MK badge ── */}
-      <div
-        style={{
-          position: "relative",
-          width: 144,
-          height: 144,
+          zIndex: 9999,
+          background: "#07080C",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginBottom: "2rem",
+          overflow: "hidden",
+          opacity:    exiting ? 0 : 1,
+          transform:  exiting ? "scale(1.04)" : "scale(1)",
+          transition: exiting
+            ? "opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1)"
+            : "none",
+          pointerEvents: exiting ? "none" : "auto",
         }}
       >
-        {/* Orbit SVG ring */}
-        <svg
-          width="144"
-          height="144"
-          viewBox="0 0 144 144"
-          style={{
-            position: "absolute",
-            inset: 0,
-            transform: "rotate(-90deg)",   /* start drawing from top */
-          }}
-        >
-          {/* Track (dim) */}
-          <circle
-            cx="72" cy="72" r={RING_R}
-            fill="none"
-            stroke="rgba(223,208,184,0.07)"
-            strokeWidth="1.5"
-          />
-          {/* Progress arc */}
-          <circle
-            cx="72" cy="72" r={RING_R}
-            fill="none"
-            stroke={glowing ? "rgba(223,208,184,0.9)" : "var(--color-accent)"}
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeDasharray={CIRCUMFERENCE}
-            strokeDashoffset={phase >= 3 ? 0 : ringOffset}
+        {/* ── Aurora orbs ───────────────────────────────── */}
+        <div style={{
+          position: "absolute",
+          width: "60vmax", height: "60vmax",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(223,208,184,0.14) 0%, rgba(223,208,184,0.04) 45%, transparent 70%)",
+          top: "-18%", right: "-18%",
+          filter: "blur(10px)",
+          animation: "orb-1 10s ease-in-out infinite",
+          pointerEvents: "none",
+        }} />
+        <div style={{
+          position: "absolute",
+          width: "50vmax", height: "50vmax",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(148,137,121,0.1) 0%, rgba(57,62,70,0.06) 50%, transparent 72%)",
+          bottom: "-22%", left: "-12%",
+          filter: "blur(14px)",
+          animation: "orb-2 13s ease-in-out infinite",
+          pointerEvents: "none",
+        }} />
+        <div style={{
+          position: "absolute",
+          width: "28vmax", height: "28vmax",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(223,208,184,0.06) 0%, transparent 70%)",
+          top: "60%", right: "10%",
+          filter: "blur(18px)",
+          animation: "orb-3 8s ease-in-out infinite",
+          pointerEvents: "none",
+        }} />
+
+        {/* ── Noise texture ────────────────────────────── */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E\")",
+        }} />
+
+        {/* ── Main content ─────────────────────────────── */}
+        <div style={{
+          display: "flex", flexDirection: "column", alignItems: "center",
+          gap: 0, zIndex: 1, textAlign: "center",
+          padding: "0 2rem",
+        }}>
+
+          {/* Name — blur-to-sharp, letter-spacing morphs */}
+          <h1
             style={{
-              transition: phase >= 3 ? "stroke-dashoffset 0.1s, stroke 0.5s" : "none",
-              filter: glowing ? "drop-shadow(0 0 6px rgba(223,208,184,0.7))" : "none",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "clamp(2.8rem, 9vw, 6rem)",
+              fontWeight: 700,
+              lineHeight: 1.05,
+              margin: 0,
+              color: "#F0EDE8",
+              letterSpacing: phase >= 1 ? "-0.03em" : "0.3em",
+              opacity: phase >= 1 ? 1 : 0,
+              filter: phase >= 1 ? "blur(0px)" : "blur(20px)",
+              transition: [
+                "opacity 1.2s cubic-bezier(0.16,1,0.3,1)",
+                "filter 1.2s cubic-bezier(0.16,1,0.3,1)",
+                "letter-spacing 1.4s cubic-bezier(0.16,1,0.3,1)",
+              ].join(", "),
             }}
-          />
-          {/* Dot at the head of the progress arc */}
-          {phase === 2 && ringProgress > 0.02 && (
-            <circle
-              cx={72 + RING_R * Math.cos(2 * Math.PI * ringProgress - Math.PI / 2)}
-              cy={72 + RING_R * Math.sin(2 * Math.PI * ringProgress - Math.PI / 2)}
-              r="3"
-              fill="var(--color-accent)"
-              style={{ filter: "drop-shadow(0 0 4px var(--color-accent))" }}
-            />
-          )}
-        </svg>
+          >
+            Mayuresh
+            <br />
+            <span
+              style={{
+                background: "linear-gradient(120deg, var(--color-accent) 0%, var(--color-accent-2) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Kamble
+            </span>
+          </h1>
 
-        {/* MK badge */}
-        <div
-          style={{
-            width: 84,
-            height: 84,
-            borderRadius: "50%",
-            background: "var(--color-accent)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+          {/* Divider line — grows outward */}
+          <div style={{
+            width:  phase >= 2 ? "min(220px, 45vw)" : "0px",
+            height: "1px",
+            margin: "2rem 0 1.6rem",
+            background: "linear-gradient(90deg, transparent, rgba(223,208,184,0.45), transparent)",
+            transition: "width 0.9s cubic-bezier(0.16,1,0.3,1)",
+          }} />
+
+          {/* Role */}
+          <p style={{
             fontFamily: "'JetBrains Mono', monospace",
-            fontWeight: 800,
-            fontSize: "1.55rem",
-            letterSpacing: "0.05em",
-            color: "#0D1117",
-            userSelect: "none",
-            /* Spring bounce in */
-            transform: phase >= 1 ? "scale(1)" : "scale(0.15)",
-            opacity: phase >= 1 ? 1 : 0,
-            transition:
-              "transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease, box-shadow 0.8s ease",
-            boxShadow: glowing
-              ? "0 0 0 8px rgba(223,208,184,0.08), 0 0 40px rgba(223,208,184,0.3)"
-              : "0 0 0 0px transparent",
-          }}
-        >
-          MK
+            fontSize: "clamp(0.58rem, 1.8vw, 0.72rem)",
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: "var(--color-muted)",
+            margin: 0,
+            opacity:   phase >= 3 ? 1 : 0,
+            transform: phase >= 3 ? "translateY(0)" : "translateY(12px)",
+            transition: "opacity 0.7s ease, transform 0.7s ease",
+          }}>
+            Full Stack Developer&nbsp;&nbsp;·&nbsp;&nbsp;ML Enthusiast
+          </p>
         </div>
-      </div>
 
-      {/* ── Name ── */}
-      <div
-        style={{
-          fontFamily: "'Inter', sans-serif",
-          fontWeight: 800,
-          fontSize: "clamp(1.5rem, 5vw, 2.4rem)",
-          letterSpacing: "-0.04em",
-          color: "#F6F3EE",
-          opacity: phase >= 3 ? 1 : 0,
-          transform: phase >= 3 ? "translateY(0)" : "translateY(12px)",
-          transition: "opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1)",
-          marginBottom: "0.6rem",
-        }}
-      >
-        {NAME}
-      </div>
+        {/* ── Shimmer progress bar at bottom ────────────── */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0,
+          height: "1px",
+          background: "rgba(223,208,184,0.07)",
+          overflow: "hidden",
+          opacity:    phase >= 4 ? 1 : 0,
+          transition: "opacity 0.6s ease",
+        }}>
+          <div style={{
+            position: "absolute",
+            top: 0, width: "25%", height: "100%",
+            background: "linear-gradient(90deg, transparent, rgba(223,208,184,0.9), transparent)",
+            animation: "shimmer 2s ease-in-out infinite",
+          }} />
+        </div>
 
-      {/* ── Tagline ── */}
-      <div
-        style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: "clamp(0.65rem, 2vw, 0.78rem)",
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
-          color: "var(--color-muted)",
-          opacity: phase >= 4 ? 1 : 0,
-          transform: phase >= 4 ? "translateY(0)" : "translateY(8px)",
-          transition: "opacity 0.5s ease 0.05s, transform 0.5s ease 0.05s",
-        }}
-      >
-        {TAGLINE}
-      </div>
-
-      {/* ── Bottom progress bar ── */}
-      <div
-        style={{
+        {/* ── Soft pulsing center glow ───────────────────── */}
+        <div style={{
           position: "absolute",
-          bottom: 0,
-          left: 0,
-          height: 2,
-          width: `${ringProgress * 100}%`,
-          background:
-            "linear-gradient(90deg, var(--color-accent-2), var(--color-accent))",
-          transition: "width 0.05s linear",
-          opacity: 0.6,
-        }}
-      />
+          width: "30vmax", height: "30vmax",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(223,208,184,0.03) 0%, transparent 70%)",
+          animation: "soft-pulse 3s ease-in-out infinite",
+          pointerEvents: "none",
+          zIndex: 0,
+        }} />
 
-      {/* ── Version watermark ── */}
-      <div
-        style={{
+        {/* ── Corner label ──────────────────────────────── */}
+        <span style={{
           position: "absolute",
-          bottom: "1.25rem",
-          right: "1.5rem",
+          bottom: "1.4rem", right: "1.5rem",
           fontFamily: "'JetBrains Mono', monospace",
-          fontSize: "0.6rem",
-          color: "rgba(246,243,238,0.15)",
+          fontSize: "0.58rem",
           letterSpacing: "0.1em",
-        }}
-      >
-        v1.0.0
+          color: "rgba(240,237,232,0.1)",
+        }}>
+          portfolio · 2025
+        </span>
       </div>
-    </div>
+    </>
   );
 };
