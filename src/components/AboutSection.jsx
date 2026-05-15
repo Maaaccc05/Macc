@@ -131,6 +131,7 @@ export const AboutSection = () => {
                       flexShrink: 0,
                     }}
                   >
+
                     <Icon size={16} color="var(--color-accent)" />
                   </div>
                   <div>
