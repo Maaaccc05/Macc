@@ -73,10 +73,38 @@ export const HeroSection = () => {
         {/* CTAs */}
         <div
           className="opacity-0 animate-fade-in-delay-3"
-          style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}
+          style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", alignItems: "center" }}
         >
           <a href="#projects" className="btn-accent">
             View my work <ArrowRight size={14} />
+          </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.4rem",
+              padding: "0.55rem 1.2rem",
+              borderRadius: "9999px",
+              border: "1px solid rgba(223,208,184,0.3)",
+              color: "var(--color-muted)",
+              fontSize: "0.82rem",
+              fontWeight: 500,
+              textDecoration: "none",
+              transition: "border-color 0.2s, color 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "rgba(223,208,184,0.7)";
+              e.currentTarget.style.color = "var(--color-text)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(223,208,184,0.3)";
+              e.currentTarget.style.color = "var(--color-muted)";
+            }}
+          >
+            Download CV
           </a>
         </div>
 

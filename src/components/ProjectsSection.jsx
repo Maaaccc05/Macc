@@ -25,16 +25,17 @@ const projects = [
     demoUrl: "https://streamtogether.onrender.com/",
     githubUrl: "https://github.com/Maaaccc05/StreamTogether",
   },
+
   {
     id: 3,
     category: "webdev",
-    title: "Cafe Finder",
+    title: "SiteBlitz",
     description:
-      "Just simple Cafe finder which finds Cafe near you using Google Maps API.",
-    image: "/projects/image2.png",
-    tags: ["React", "Tailwind", "Google Maps API"],
-    demoUrl: "https://cafe-finder-nu.vercel.app/",
-    githubUrl: "https://github.com/Maaaccc05/Cafe-Finder",
+      "Built SiteBlitz, an AI-powered platform that audits live websites, during a hackathon where our team secured 1st place",
+    image: "/projects/image5.png",
+    tags: ["Next.js", "Tailwind", "Lightroom"],
+    demoUrl: "https://site-blitz.vercel.app/",
+    githubUrl: "https://github.com/Maaaccc05/SiteBlitz"
   },
 
   {
@@ -47,6 +48,19 @@ const projects = [
     tags: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "Scikit-Learn"],
     githubUrl: "https://github.com/Maaaccc05/Car-Price-Prediction",
   },
+
+  {
+    id: 5,
+    category: "webdev",
+    title: "Cafe Finder",
+    description:
+      "Just simple Cafe finder which finds Cafe near you using Google Maps API.",
+    image: "/projects/image2.png",
+    tags: ["React", "Tailwind", "Google Maps API"],
+    demoUrl: "https://cafe-finder-nu.vercel.app/",
+    githubUrl: "https://github.com/Maaaccc05/Cafe-Finder",
+  },
+
 ];
 
 const TABS = [

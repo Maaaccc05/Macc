@@ -95,18 +95,6 @@ export const AboutSection = () => {
               projects.
             </p>
 
-            <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-              <a
-                href="/resume.pdf"
-                className="btn-accent"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download CV
-              </a>
-            </div>
-
-
           </div>
 
           {/* Right: cards */}

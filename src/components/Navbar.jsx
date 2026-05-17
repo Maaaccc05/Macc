@@ -144,7 +144,7 @@ export const Navbar = () => {
                 letterSpacing: "0.02em",
               }}
             >
-              MK
+              Macc
             </span>
             <span
               style={{
