@@ -43,12 +43,12 @@ const SKILL_ICONS = {
   "Python":      "https://cdn.simpleicons.org/python/4B8BBE",
   "NumPy":       "https://cdn.simpleicons.org/numpy/4DABF5",
   "Pandas":      "https://cdn.simpleicons.org/pandas/B07CE5",
-  "Matplotlib":  "https://cdn.simpleicons.org/matplotlib/6595C8",
+  "Matplotlib":  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg",
   "Seaborn":     "https://cdn.simpleicons.org/python/64DCC8",
   "OpenCV":      "https://cdn.simpleicons.org/opencv/9B72E8",
   "Git/GitHub":  "https://cdn.simpleicons.org/github/E0D5C5",
   "Figma":       "https://cdn.simpleicons.org/figma/F24E1E",
-  "VS Code":     "https://cdn.simpleicons.org/visualstudiocode/007ACC",
+  "VS Code":     "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg",
   "Postman":     "https://cdn.simpleicons.org/postman/FF6C37",
 };
 
