@@ -119,7 +119,7 @@ export const HeroSection = () => {
           }}
         >
           {[
-            { value: "3", label: "Years coding" },
+            { value: "3+", label: "Years coding" },
             { value: "7+", label: "Projects completed" },
           ].map(({ value, label }) => (
             <div key={label}>
