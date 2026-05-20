@@ -8,6 +8,7 @@ const skills = [
   { name: "Tailwind CSS",category: "webdev" },
   { name: "Node.js",     category: "webdev" },
   { name: "Express",     category: "webdev" },
+  { name: "PHP",         category: "webdev" },
   { name: "MongoDB",     category: "webdev" },
   { name: "SQL",         category: "webdev" },
   // Machine Learning / AI
@@ -38,6 +39,7 @@ const SKILL_ICONS = {
   "Tailwind CSS":"https://cdn.simpleicons.org/tailwindcss/38BDF8",
   "Node.js":     "https://cdn.simpleicons.org/nodedotjs/6BBF47",
   "Express":     "https://cdn.simpleicons.org/express/DDDDDD",
+  "PHP":         "https://cdn.simpleicons.org/php/9B7FD4",
   "MongoDB":     "https://cdn.simpleicons.org/mongodb/00ED64",
   "SQL":         "https://cdn.simpleicons.org/postgresql/699ACA",
   "Python":      "https://cdn.simpleicons.org/python/4B8BBE",
