@@ -11,8 +11,8 @@ const socials = [
   {
     icon: Twitter,
     label: "X (Twitter)",
-    handle: "@macck69",
-    href: "https://x.com/macck69",
+    handle: "@maaccc20",
+    href: "https://x.com/maaccc20",
     color: "#e2e8f0",
   },
   {
