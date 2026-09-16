@@ -33,7 +33,8 @@ const projects = [
       "Heart Dieseas Predication",
     image: "/projects/image6.png",
     tags: ["Python", "Pandas", "Matplotlib", "Seaborn", "Numpy"],
-    githubUrl: "https://heart-dieseas-predictor.streamlit.app/",
+    demoUrl: "https://heart-dieseas-predictor.streamlit.app/",
+    githubUrl: "https://github.com/Maaaccc05/Heart-Dieseas-Predictor"
   },
 
 
