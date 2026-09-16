@@ -25,9 +25,20 @@ const projects = [
     demoUrl: "https://streamtogether.onrender.com/",
     githubUrl: "https://github.com/Maaaccc05/StreamTogether",
   },
-
   {
     id: 3,
+    category: "ml",
+    title: "Heart Dieseas Predication",
+    description:
+      "Heart Dieseas Predication",
+    image: "/projects/image6.png",
+    tags: ["Python", "Pandas", "Matplotlib", "Seaborn", "Numpy"],
+    githubUrl: "https://heart-dieseas-predictor.streamlit.app/",
+  },
+
+
+  {
+    id: 4,
     category: "webdev",
     title: "SiteBlitz",
     description:
@@ -39,7 +50,7 @@ const projects = [
   },
 
   {
-    id: 4,
+    id: 5,
     category: "ml",
     title: "Car Price Prediction",
     description:
@@ -50,7 +61,7 @@ const projects = [
   },
 
   {
-    id: 5,
+    id: 6,
     category: "webdev",
     title: "Cafe Finder",
     description:
